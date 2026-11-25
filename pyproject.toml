@@ -31,6 +31,8 @@ dense = ["sentence-transformers>=3.0"]
 llm = ["anthropic>=0.70"]
 all = ["sentence-transformers>=3.0", "anthropic>=0.70"]
 dev = ["pytest>=8"]
+# Documentation site: mkdocs serve
+docs = ["mkdocs-material>=9.5"]
 
 [project.scripts]
 ragpick = "ragpick.cli:main"

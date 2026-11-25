@@ -6,6 +6,8 @@
 ragpick run config.yaml
 ```
 
+**Documentation website:** https://dahiya-04.github.io/ragpick-pick-the-right-RAG-/
+
 ---
 
 ## Contents

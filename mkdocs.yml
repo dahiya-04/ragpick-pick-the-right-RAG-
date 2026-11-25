@@ -1,0 +1,59 @@
+site_name: ragpick
+site_description: Bring your documents and models; get the RAG setup that works best for them, with how sure we are.
+site_url: https://dahiya-04.github.io/ragpick-pick-the-right-RAG-/
+repo_url: https://github.com/dahiya-04/ragpick-pick-the-right-RAG-
+repo_name: ragpick
+edit_uri: edit/main/docs/
+
+nav:
+  - Home: index.md
+  - Words you will see: glossary.md
+  - How it works: how-it-works.md
+  - Architecture: architecture.md
+  - Setup and running: getting-started.md
+  - Our experiment: experiment.md
+  - How it stays honest: honesty.md
+  - Reference: reference.md
+  - Limitations: limitations.md
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.footer
+    - navigation.top
+    - navigation.sections
+    - toc.follow
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

@@ -1,0 +1,46 @@
+# Example project: 18 SYNTHETIC circulars written to look like RBI regulations (not real RBI documents)
+# and 36 hand-written questions, including superseded rules, distractors and unanswerable questions.
+# Needs AZURE_EMBEDDING_* and GOEDEL_API_KEY in .env.  Run:  ragpick run examples/rbi-synthetic/config.yaml
+# Offline (no keys, retrieval only):  add  --set generation.enabled=false --set "retrievers=[{name: bm25, type: bm25}]" --set embedders={}
+
+# Run from d:\personal\RAG_folder:   .\.venv\Scripts\ragpick.exe run rbi-project\config.yaml
+# Keys come from d:\personal\RAG_folder\.env (AZURE_EMBEDDING_*, GOEDEL_API_KEY).
+
+run_name: rbi
+
+corpus:
+  path: data/corpus              # put your RBI PDFs here
+
+testset:
+  path: testset/questions.jsonl  # your hand-written questions
+  split: all                     # change to "test" after running `ragpick split`
+
+embedders:
+  azure-small: {type: azure, api: openai, deployment: text-embedding-3-small}
+
+# DUMMY-SCALE chunk sizes: the synthetic circulars are short (100-1300 words), so chunks are kept
+# small to match real proportions. For real RBI PDFs (often 20,000+ words) use:
+#   fixed: size 400, overlap 50   |   structure: max_size 500, min_size 40   |   context_k: 5
+chunkers:
+  - {name: fixed, type: fixed, size: 120, overlap: 20}
+  - {name: structure, type: structure, max_size: 150, min_size: 25}
+
+retrievers:
+  - {name: bm25, type: bm25}
+  - {name: dense, type: dense, embedder: azure-small}
+  - {name: hybrid, type: hybrid, embedder: azure-small}
+
+evaluation:
+  k: [1, 3, 5]
+  context_k: 3                   # dummy scale; use 5 for real PDFs
+  baseline: {chunker: fixed, retriever: dense, reranker: none}
+
+generation:
+  llm: {type: goedel, model: deepseek/deepseek-v4.1-flash}
+
+judge:
+  llm: {type: goedel, model: deepseek/deepseek-v4.1-flash}
+
+decision:
+  max_latency_ms:      # e.g. 3000
+  prefer: cost         # cost | speed

@@ -1,0 +1,101 @@
+# ragpick experiment config. Run everything with:  ragpick run config.yaml
+# Paths are relative to this file. Override anything on the command line:
+#   ragpick run config.yaml --set generation.enabled=false --limit 10
+
+run_name: rbi-circulars
+output_dir: results
+cache_dir: .ragpick_cache        # parsed docs, chunks, embeddings and LLM answers are cached here
+
+corpus:
+  path: data/corpus              # folder of .pdf / .txt / .md / .html
+  glob: "**/*"
+  parse:
+    remove_headers: true         # drop lines repeated at the top/bottom of most pages
+    drop_hindi: true             # drop lines that are mostly Devanagari (bilingual RBI PDFs)
+    tables: true                 # detect tables and keep them as Markdown
+  metadata:
+    extractor: rbi               # rbi = circular no., ref no., date, supersession; none = skip
+    csv: data/metadata.csv       # optional manual overrides (title, date, superseded, superseded_by ...)
+    patterns: {}                 # extra regexes, e.g. {circular_no: "SEBI/HO/[A-Z/-]+/\\d+"}
+
+testset:
+  path: testset/questions.jsonl
+  split: test                    # dev while tuning; test only for the final numbers
+
+embedders:
+  bge-m3:
+    type: sentence-transformers
+    model: BAAI/bge-m3
+    max_seq_length: 1024
+  # Azure AI Foundry embeddings. Needs AZURE_EMBEDDING_ENDPOINT and AZURE_EMBEDDING_API_KEY
+  # (environment or a .env file; see .env.example). `deployment` = your deployment name in Foundry.
+  azure-small:
+    type: azure
+    api: openai                  # Azure OpenAI deployment (text-embedding-3-large / -small)
+    deployment: text-embedding-3-small
+    # dimensions: 512            # optional; text-embedding-3 models can shorten vectors
+  # azure-cohere:
+  #   type: azure
+  #   api: inference               # Foundry model inference endpoint (Cohere-embed-v3-multilingual, embed-v-4-0)
+  #   deployment: Cohere-embed-v3-multilingual
+  #   endpoint_env: AZURE_COHERE_ENDPOINT     # optional: a different resource than the default variables
+  #   api_key_env: AZURE_COHERE_API_KEY
+  e5-small:                      # small and fast; used for semantic chunking on CPU
+    type: sentence-transformers
+    model: intfloat/multilingual-e5-small
+    query_prefix: "query: "
+    passage_prefix: "passage: "
+
+chunkers:                        # sizes are in words (about 1.3 tokens per word)
+  - {name: fixed, type: fixed, size: 400, overlap: 50}
+  - {name: recursive, type: recursive, size: 400, overlap: 40}
+  - {name: structure, type: structure, max_size: 500, min_size: 40}
+  - {name: semantic, type: semantic, embedder: e5-small, breakpoint_percentile: 90, max_size: 500}
+
+retrievers:
+  - {name: bm25, type: bm25}
+  - {name: dense, type: dense, embedder: azure-small}
+  - {name: hybrid, type: hybrid, embedder: azure-small, rrf_k: 60}
+  # - {name: dense-bge, type: dense, embedder: bge-m3}     # local open-source model to compare against
+
+rerankers:
+  - {name: none, type: none}
+  - {name: bge-reranker, type: cross-encoder, model: BAAI/bge-reranker-v2-m3, top_n: 30}
+
+superseded_filter: [false]       # [false, true] also tests dropping superseded circulars
+
+evaluation:
+  k: [1, 5, 10]
+  context_k: 5                   # chunks given to the LLM
+  overlap_threshold: 0.5         # share of gold 3-grams a chunk must contain to count as a hit
+  baseline: {chunker: fixed, retriever: dense, reranker: none}
+  failure_examples: 15
+
+generation:
+  enabled: true
+  configs: top:4                 # "all", or "top:N" = only the N best setups by Recall@context_k (saves quota)
+  concurrency: 2                 # Goedel free plan allows 2 concurrent requests (student 4, paid 8)
+  llm:
+    type: goedel                 # needs GOEDEL_API_KEY. Other options: anthropic, openai-compatible, extractive
+    model: deepseek/deepseek-v4.1-flash
+    max_tokens: 2048
+    thinking: false              # reasoning tokens count as output (free plan: 150k output tokens/day)
+
+judge:
+  enabled: true
+  llm:
+    type: goedel                 # or `type: lexical` (heuristic, offline)
+    model: deepseek/deepseek-v4.1-flash
+    max_tokens: 2048
+    thinking: false              # true = more careful grading, but uses far more output tokens
+
+# Final recommendation: among setups statistically tied on quality, pick the cheapest (or fastest)
+# that fits your limits. Leave limits empty for none.
+decision:
+  max_latency_ms:                # e.g. 3000 = end-to-end p95 per query (search + embedding + answer)
+  max_usd_per_1k:                # e.g. 1.0 = cost per 1,000 queries (needs prices below)
+  prefer: cost                   # cost | speed
+
+# USD per million tokens [input, output]. Add your generation model to see $ instead of token counts.
+# prices:
+#   deepseek/deepseek-v4.1-flash: [0.10, 0.40]

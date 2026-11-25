@@ -1,0 +1,2 @@
+{"id": "q001", "type": "lookup", "question": "Replace with your question", "answer": "Your reference answer", "evidence": [{"text": "Paste the exact passage from the document that contains the answer.", "doc": "file_name_without_extension"}]}
+{"id": "q002", "type": "unanswerable", "question": "A question whose answer is not in the corpus", "answer": "", "evidence": []}

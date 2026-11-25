@@ -1,0 +1,30 @@
+SYNTHETIC SAMPLE FOR TESTING RAGPICK - NOT AN OFFICIAL RBI DOCUMENT
+RBI/DEMO/2021-22/27
+DPSS.CO.PD.No.S-479/02.14.006/2021-22
+August 27, 2021
+
+Master Direction on Prepaid Payment Instruments (PPIs)
+
+All Prepaid Payment Instrument Issuers
+
+Madam / Dear Sir,
+
+1. Introduction
+Prepaid Payment Instruments (PPIs) facilitate purchase of goods and services, financial services and remittances against the value stored on such instruments.
+
+2. Limits on PPIs
+The limits applicable to each category of PPI are given in the table below.
+
+| PPI category | Maximum amount outstanding | Monthly loading limit |
+| Small PPI (minimum details) | Rs 10,000 | Rs 10,000 |
+| Full-KYC PPI | Rs 2,00,000 | Not specified |
+| Gift PPI | Rs 10,000 | Not reloadable |
+
+3. Validity
+All PPIs issued in the country shall have a minimum validity period of one year from the date of last loading or reloading in the PPI.
+
+4. Cash Withdrawal
+Cash withdrawal shall be permitted only from full-KYC PPIs, subject to a limit of Rs 2,000 per transaction and an overall limit of Rs 10,000 per month per PPI.
+
+Yours faithfully,
+Chief General Manager

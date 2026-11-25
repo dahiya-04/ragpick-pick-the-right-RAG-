@@ -1,0 +1,50 @@
+Reserve Bank of India | Synthetic demo corpus | Page 1
+SYNTHETIC SAMPLE FOR TESTING RAGPICK - NOT AN OFFICIAL RBI DOCUMENT
+भारतीय रिज़र्व बैंक
+RBI/DEMO/2016-17/11
+DOR.AML.BC.No.81/14.01.001/2016-17
+February 25, 2016
+
+Master Direction - Know Your Customer (KYC) Direction, 2016
+
+All Regulated Entities
+
+Madam / Dear Sir,
+
+CHAPTER I PRELIMINARY
+
+1. Short Title and Commencement
+These Directions shall be called the Reserve Bank of India (Know Your Customer (KYC)) Directions, 2016. They shall come into effect on the day they are placed on the official website of the Reserve Bank.
+
+2. Applicability
+The provisions of these Directions shall apply to every entity regulated by the Reserve Bank, including scheduled commercial banks, regional rural banks, urban co-operative banks and non-banking financial companies.
+
+3. Definitions
+3.1 Customer Due Diligence (CDD) means identifying and verifying the customer and the beneficial owner using reliable and independent sources of identification.
+3.2 Officially Valid Document (OVD) means the passport, the driving licence, proof of possession of Aadhaar number, the Voter Identity Card issued by the Election Commission of India and the job card issued by NREGA.
+
+Reserve Bank of India | Synthetic demo corpus | Page 2
+
+CHAPTER IV RISK MANAGEMENT
+
+16. Risk Categorisation
+Regulated entities shall categorise customers as low, medium or high risk based on the assessment and risk perception of the RE. Risk categorisation shall be undertaken based on parameters such as customer's identity, social or financial status, nature of business activity and information about the clients' business and their location.
+
+17. Enhanced Due Diligence
+Enhanced due diligence shall be applied to customers categorised as high risk, including politically exposed persons, and the source of funds shall be verified for such customers.
+
+CHAPTER VI ONGOING DUE DILIGENCE
+
+38. Periodic Updation
+Regulated entities shall adopt a risk-based approach for periodic updation of KYC. Periodic updation shall be carried out at least once every two years for high risk customers, once every eight years for medium risk customers and once every ten years for low risk customers from the date of opening of the account or the last KYC updation.
+
+Reserve Bank of India | Synthetic demo corpus | Page 3
+
+39. Video based Customer Identification Process (V-CIP)
+Regulated entities may undertake live V-CIP, to be carried out by an official of the RE, for establishment of an account based relationship with an individual customer after obtaining the informed consent of the customer. The V-CIP shall be recorded and the recording shall be stored safely with date and time stamp.
+
+40. Record Keeping
+Regulated entities shall maintain all necessary records of transactions between the RE and the customer, both domestic and international, for at least five years from the date of transaction.
+
+Yours faithfully,
+Chief General Manager

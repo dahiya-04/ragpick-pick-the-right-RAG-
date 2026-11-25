@@ -1,0 +1,20 @@
+# secrets
+.env
+
+# Python / build
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# ragpick outputs (re-creatable)
+.ragpick_cache/
+results/
+ragpick_demo/
+
+# your own working projects and documents stay local
+rbi-project/
+data/corpus/*.pdf

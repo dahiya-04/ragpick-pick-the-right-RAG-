@@ -1,0 +1,49 @@
+# Offline demo: no API key and no model downloads needed.
+# The "hashing" embedder, "lexical" reranker, "extractive" generator and "lexical" judge are
+# stand-ins so the pipeline runs anywhere. Swap them for real models in your own config.
+
+run_name: demo
+output_dir: results
+cache_dir: .ragpick_cache
+
+corpus:
+  path: corpus
+  metadata: {extractor: rbi}
+
+testset:
+  path: questions.jsonl
+  split: all
+
+embedders:
+  hash: {type: hashing, dim: 4096}
+
+chunkers:
+  - {name: fixed, type: fixed, size: 80, overlap: 10}
+  - {name: recursive, type: recursive, size: 80}
+  - {name: structure, type: structure, max_size: 120, min_size: 15}
+  - {name: semantic, type: semantic, embedder: hash, max_size: 120, min_size: 15}
+
+retrievers:
+  - {name: bm25, type: bm25}
+  - {name: dense, type: dense, embedder: hash}
+  - {name: hybrid, type: hybrid, embedder: hash}
+
+rerankers:
+  - {name: none, type: none}
+  - {name: lexical, type: lexical, top_n: 20}
+
+superseded_filter: [false, true]
+
+evaluation:
+  k: [1, 3, 5]
+  context_k: 3
+  baseline: {chunker: fixed, retriever: dense, reranker: none, superseded_filter: false}
+
+generation:
+  enabled: true
+  configs: all
+  llm: {type: extractive}
+
+judge:
+  enabled: true
+  llm: {type: lexical}

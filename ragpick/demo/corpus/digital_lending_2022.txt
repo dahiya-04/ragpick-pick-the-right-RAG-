@@ -1,0 +1,25 @@
+SYNTHETIC SAMPLE FOR TESTING RAGPICK - NOT AN OFFICIAL RBI DOCUMENT
+RBI/DEMO/2022-23/111
+DOR.CRE.REC.66/21.07.001/2022-23
+September 2, 2022
+
+Guidelines on Digital Lending
+
+All Commercial Banks and NBFCs
+
+Madam / Dear Sir,
+
+1. Disbursal and Repayment
+All loan disbursals and repayments shall be executed only between the bank accounts of the borrower and the regulated entity, without any pass-through or pool account of any third party.
+
+2. Key Fact Statement
+A standardised Key Fact Statement (KFS) shall be provided to the borrower before the execution of the contract. The KFS shall disclose the all-inclusive cost of digital loans in the form of the Annual Percentage Rate (APR).
+
+3. Cooling-off Period
+Borrowers shall be given an explicit option to exit the digital loan by paying the principal and the proportionate APR without any penalty during the cooling-off period. The cooling-off period shall not be less than three days for loans having tenor of seven days or more, and one day for loans having tenor of less than seven days.
+
+4. Grievance Redressal
+Regulated entities shall appoint a nodal grievance redressal officer to deal with digital lending complaints. If a complaint is not resolved within a period of thirty days, the borrower can lodge a complaint under the Reserve Bank Integrated Ombudsman Scheme.
+
+Yours faithfully,
+Chief General Manager

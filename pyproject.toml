@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ragpick"
+version = "0.1.0"
+description = "Bring your documents and models; get the RAG setup that works best for them, with how sure we are."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["rag", "evaluation", "retrieval", "llm", "benchmark"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.26",
+    "pyyaml>=6",
+    "pymupdf>=1.24",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Dense embeddings, semantic chunking with real models, cross-encoder reranking
+dense = ["sentence-transformers>=3.0"]
+# Answer generation and LLM-as-judge with Claude
+llm = ["anthropic>=0.70"]
+all = ["sentence-transformers>=3.0", "anthropic>=0.70"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+ragpick = "ragpick.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ragpick*"]
+
+[tool.setuptools.package-data]
+ragpick = ["demo/*.yaml", "demo/*.jsonl", "demo/corpus/*.txt", "templates/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
